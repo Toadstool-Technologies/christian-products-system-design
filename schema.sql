@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS productdb;
 
 CREATE DATABASE productdb;
 
-\c productdb
+\c productdb;
 
 DROP TABLE IF EXISTS products, features, styles, style_photos, skus;
 
@@ -53,12 +53,24 @@ ALTER TABLE style_photos ADD CONSTRAINT style_photos_pkey PRIMARY KEY (id);
 CREATE TABLE skus (
  id BIGSERIAL,
  styleId BIGSERIAL,
- size VARCHAR(4),
+ size VARCHAR,
  quantity INTEGER
 );
 
 
 ALTER TABLE skus ADD CONSTRAINT skus_pkey PRIMARY KEY (id);
+
+\COPY products FROM './CSV/product.csv' DELIMITER ',' CSV HEADER;
+
+\COPY features FROM './CSV/features.csv' DELIMITER ',' CSV HEADER;
+
+\COPY styles FROM './CSV/styles.csv' DELIMITER ',' CSV NULL AS 'null' HEADER;
+
+UPDATE styles SET sale_price=0 WHERE sale_price IS NULL;
+
+\COPY style_photos FROM './CSV/photos.csv' DELIMITER ',' CSV HEADER;
+
+\COPY skus FROM './CSV/skus.csv' DELIMITER ',' CSV HEADER;
 
 ALTER TABLE features ADD CONSTRAINT features_id_fkey FOREIGN KEY (product_id) REFERENCES products(id);
 ALTER TABLE styles ADD CONSTRAINT styles_id_fkey FOREIGN KEY (product_id) REFERENCES products(id);
