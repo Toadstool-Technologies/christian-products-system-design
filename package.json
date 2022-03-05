@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "nodemon server/app.js"
+    "start": "nodemon server/start.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "express": "^4.17.3",
@@ -8,5 +10,9 @@
     "mongoose": "^6.2.4",
     "pg": "^8.7.3",
     "postgres": "^1.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   }
 }

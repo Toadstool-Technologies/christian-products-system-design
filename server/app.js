@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('./db');
 const app = express();
 const PORT = 3000 || process.env.PORT;
 const productControl = require('./controller/productControl.js');
@@ -9,6 +10,4 @@ app.get('/products', (req, res) => {
   productControl.get(req, res);
 })
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-})
+module.exports = app;
