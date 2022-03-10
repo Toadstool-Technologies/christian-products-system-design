@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('./db');
 const app = express();
 const PORT = 3000 || process.env.PORT;
 const product = require('./controller/productControl.js');
